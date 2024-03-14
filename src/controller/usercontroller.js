@@ -49,5 +49,75 @@ class userController{
             }
          }
      }
+
+     static async getuser(req,res){
+         try {
+            const users = await User.find()
+            if(!users){
+                return errormessage(res,401,"no user found")
+            }else{
+                return sucessmessage(res,201,"all user successfuly retrived",users)
+            }
+            
+         } catch (error) {
+            return errormessage(res,401,`error is ${error}`)
+         }
+     }
+     static async deleteuser(req,res){
+        try {
+           const users = await User.deleteMany()
+           if(!users){
+               return errormessage(res,401,"no user found")
+           }else{
+               return sucessmessage(res,201,"all user successfuly deleted")
+           }
+           
+        } catch (error) {
+           return errormessage(res,401,`error is ${error}`)
+        }
+    }
+    static async getoneuser(req,res){
+        const id=req.params.id
+        try {
+           const users = await User.findById(id)
+           if(!users){
+               return errormessage(res,401,"no user found")
+           }else{
+               return sucessmessage(res,201,`user on this id ${id} successfuly retrived`,users)
+           }
+           
+        } catch (error) {
+           return errormessage(res,401,`error is ${error}`)
+        }
+    }
+
+    static async deleteoneuser(req,res){
+        const id=req.params.id
+        try {
+           const users = await User.findByIdAndDelete(id)
+           if(!users){
+               return errormessage(res,401,"no user found")
+           }else{
+               return sucessmessage(res,201,`user on this id ${id} successfuly deleted`)
+           }
+           
+        } catch (error) {
+           return errormessage(res,401,`error is ${error}`)
+        }
+    }
+    static async updateoneuser(req,res){
+        const id=req.params.id
+        try {
+           const users = await User.findByIdAndUpdate(id,req.body,{new:true})
+           if(!users){
+               return errormessage(res,401,"no user found")
+           }else{
+               return sucessmessage(res,201,`user on this id ${id} successfuly updated`,users)
+           }
+           
+        } catch (error) {
+           return errormessage(res,401,`error is ${error}`)
+        }
+    }
 }
 export default userController
