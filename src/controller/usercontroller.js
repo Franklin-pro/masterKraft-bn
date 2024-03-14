@@ -2,6 +2,7 @@ import User from "../model/user";
 import bcrypt from "bcrypt"
 import errormessage from "../utiles/errormessage";
 import sucessmessage from "../utiles/successmessage";
+import jwt from "jsonwebtoken"
 
 
 class userController{
@@ -26,6 +27,27 @@ class userController{
         } catch (error) {
             return errormessage(res,500,`error is ${error}`)
         }
+     }
+
+     static async Login(req,res){
+         const {email,password}=req.body
+         const user = await User.findOne({email})
+         if(!user){
+            return errormessage(res,401,'please provide your email')
+         }else{
+            const comparepassword=bcrypt.compareSync(password,user.password)
+            if(!comparepassword){
+                return errormessage(res,401,'invalid password')
+            }else{
+               const token=jwt.sign({user:user},process.env.SCRET_KEY,{expiresIn:"1d"})
+               return res.status(200).json({
+                token:token,
+                data:{
+                 user:user
+                }
+              })
+            }
+         }
      }
 }
 export default userController
