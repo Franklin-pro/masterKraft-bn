@@ -1,6 +1,6 @@
 
 
-import Video from "../model/videoupload"
+import Videoupload from "../model/videoupload";
 
 // exports.uploadVideo = async (req, res) => {
 //   try {
@@ -17,8 +17,8 @@ class videocontrollers{
 
     static async uploadpostvideo(req,res){
         try {
-            const { video, uploader, youtubeLink } = req.body;
-            const newVideo = new Video({ video, uploader, youtubeLink });
+            const { video, videoTitle,videoDescription, youtubeLink } = req.body;
+            const newVideo = new Videoupload({ video, videoTitle,videoDescription, youtubeLink });
              await newVideo.save();
              res.status(201).json({ message: 'Video uploaded successfully', video: newVideo })
         } catch (error) {

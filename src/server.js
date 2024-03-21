@@ -3,12 +3,14 @@ import mongoose from "mongoose"
 import  express  from "express"
 import bodyParser from "body-parser"
 import cors from "cors"
+import router from "./routers"
 
 
 dotenv.config()
 
 const Master=express()
 Master.use(bodyParser.json())
+Master.use("/API",router)
 Master.use(cors())
 
 const port=process.env.PORT
