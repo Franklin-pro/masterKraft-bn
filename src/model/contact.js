@@ -9,13 +9,7 @@ const contactSchema=new mongoose.Schema({
     phonenumber:{type:Number,required:true},
     course:{type:String,required:true},
     message:{type:String,required:true},
-    province:[
-        {id:1,name:'eastern'},
-        {id:2,name:'western'},
-        {id:3,name:'nothern'},
-        {id:4,name:'southern'},
-        {id:5,name:'kigali city'}
-    ],
+    province:{type:String,enum:["East","West","South","Nouth","Kigali city"]},
     sendAt:{
         type:Date,
         default:new Date(Date.now())
