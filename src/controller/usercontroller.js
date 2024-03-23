@@ -11,14 +11,14 @@ class userController{
          
         try {
             if(req.body.password !== req.body.confrimpassword){
-                return errormessage(res,401,'password and confrim password not match')
+                return errormessage(res,400,'password and confrim password not match')
             }else{
                 const hashpassword=bcrypt.hashSync(req.body.password,10)
                 const hashconfrimpassword=bcrypt.hashSync(req.body.confrimpassword,10)
 
                 const user= await User.create({firstname,lastname,email,password:hashpassword,confrimpassword:hashconfrimpassword,role})
                 if(!user){
-                    return errormessage(res,401,'user not created')
+                    return errormessage(res,400,'user not created')
                 }else{
                     return sucessmessage(res,201,'user successfuly created',user)
                 }
