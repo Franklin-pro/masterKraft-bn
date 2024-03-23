@@ -12,6 +12,9 @@ const Master = express()
 Master.use(cors())
 
 Master.use(bodyParser.json())
+Master.use(bodyParser.urlencoded({
+    extended: true
+  }));
 Master.use("/API", router)
 
 const port = process.env.PORT

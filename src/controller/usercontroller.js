@@ -7,16 +7,17 @@ import jwt from "jsonwebtoken"
 
 class userController{
      static async signup(req,res){
-        const {firstname,lastname,email,password,confrimpassword,role}=req.body
+        const {firstname,lastname,email,password,confirmpassword,role}=req.body
+      
          
         try {
-            if(req.body.password !== req.body.confrimpassword){
-                return errormessage(res,400,'password and confrim password not match')
+            if(req.body.password !== req.body.confirmpassword){
+                return errormessage(res,400,'password and confirm password not match')
             }else{
                 const hashpassword=bcrypt.hashSync(req.body.password,10)
-                const hashconfrimpassword=bcrypt.hashSync(req.body.confrimpassword,10)
+                const hashconfirmpassword=bcrypt.hashSync(req.body.confirmpassword,10)
 
-                const user= await User.create({firstname,lastname,email,password:hashpassword,confrimpassword:hashconfrimpassword,role})
+                const user= await User.create({firstname,lastname,email,password:hashpassword,confirmpassword:hashconfirmpassword,role})
                 if(!user){
                     return errormessage(res,400,'user not created')
                 }else{

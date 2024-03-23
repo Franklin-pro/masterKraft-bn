@@ -4,7 +4,7 @@ import User from "../model/user"
 class DtataChequer{
 
     static userRegisterIsEmpty=(req,res,next)=>{
-        const {firstname,lastname,email,password,confrimpassword}=req.body
+        const {firstname,lastname,email,password,confirmpassword}=req.body
         const {fullname,schoolname,phonenumber,course,message,province,}=req.body
 
         if(firstname==""){
@@ -18,8 +18,8 @@ class DtataChequer{
         }
         else if(password==""){  
             return errormessage(res,401,`please provide yuor password`)
-        }else if(confrimpassword){
-            return errormessage(res,401,`please provide yuor password`)
+        }else if(confirmpassword==""){
+            return errormessage(res,401,`please provide yuor confirm password`)
         }
         else if(fullname==""){
             return errormessage(res,401,`please provide yuor fullname`)
