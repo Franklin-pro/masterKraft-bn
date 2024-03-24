@@ -20,7 +20,7 @@ class videocontrollers{
     static async uploadpostvideo(req,res){
         try {
             const {video,videoTitle,videoDescription,youtubeLink } = req.body;
-            console.log(req.body)
+            console.log(req.body.video)
             const newVideo = new Videoupload({video,videoTitle,videoDescription,youtubeLink });
             
              await newVideo.save();
