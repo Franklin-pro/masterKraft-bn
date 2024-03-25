@@ -26,12 +26,12 @@ class validator{
     }
     static contactAccountRule(){
         return[
-            check('phonenumber','Invalid mobile number').isMobilePhone('any', { strictMode: true }),
-            check("province","please write your province correctly").trim().isAlpha(),
+            check('phonenumber','Invalid mobile number please start with +250').isMobilePhone('any', { strictMode: true }),
+            check("province","please write your province correctly").trim().isString(),
             check("email","please write your email correctly").trim().isEmail(),
-            check("fullname","please write your firstName correctly").trim().isAlpha(),
-            check("schoolname","please write your schoolname correctly").trim().isAlpha(),
-            check("course","please write your course correctly").trim().isAlpha(),
+            check("fullname","please write your fullName correctly").trim().isString(),
+            check("schoolname","please write your schoolname correctly").trim().isString(),
+            check("course","please write your course correctly").trim().isString(),
             check("message","please write your message correctly").trim().isString(),
         ]
     }
