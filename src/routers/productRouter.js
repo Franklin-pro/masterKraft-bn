@@ -1,6 +1,6 @@
  import express from "express"
 import productController from "../controller/productcontroller"
-import upload from "../validation/upload"
+import upload from "../validation/uploadProduct"
 
  const router = express.Router()
  router.post("/post", upload.single('productImage'), productController.postoroduct)

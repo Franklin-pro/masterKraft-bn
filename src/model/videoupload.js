@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 
 const videoSchemas = new mongoose.Schema({
 
-    video:{type:String,required:true},
+    video:{
+        type:String,
+        required:true},
     videoTitle:{type:String,required:true},
     videoDescription:{type:String,required:true},
     youtubeLink:{type:String,required:true},

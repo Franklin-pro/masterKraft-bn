@@ -5,7 +5,8 @@ import sucessmessage from "../utiles/successmessage"
 
 class productController{
     static async postoroduct(req,res){
-        const {productImage,productName,quantityAvailable,serialNumber,productPrice}=req.body
+        const {productName,quantityAvailable,serialNumber,productPrice}=req.body
+        const productImage=req.file.path
          try {
             const product = await Product.create({productImage,productName,quantityAvailable,serialNumber,productPrice})
              if(!product){

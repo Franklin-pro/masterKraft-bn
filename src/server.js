@@ -4,13 +4,14 @@ import express from "express"
 import bodyParser from "body-parser"
 import cors from "cors"
 import router from "./routers"
-
+// import serveStatic from "serve-static"
+import path from 'path'
 dotenv.config()
 
 const Master = express()
 
 Master.use(cors())
-
+Master.use('/videos',express.static(path.join(__dirname,'../uploads')))
 Master.use(bodyParser.json())
 Master.use(bodyParser.urlencoded({
     extended: true

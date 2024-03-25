@@ -4,10 +4,10 @@ import videocontrollers from "../controller/videoController"
 import VerifyAccess from "../middlewares/velifyaccess"
 import DtataChequer from "../middlewares/datachecker"
 import multer from "multer"
+import upload from "../validation/upload"
 
 const router = express.Router()
-router.post("/post",multer().single("video"),DtataChequer.videoPostIsEmpty,videocontrollers.uploadpostvideo)
-router.post("/post",DtataChequer.videoPostIsEmpty,videocontrollers.uploadpostvideo)
+router.post("/post", upload.single("video"), DtataChequer.videoPostIsEmpty, videocontrollers.uploadpostvideo);
 router.get("/get",videocontrollers.getvideo)
 router.get("/get/:id",videocontrollers.getonevideo)
 router.delete("/delete",videocontrollers.deletevideo)
