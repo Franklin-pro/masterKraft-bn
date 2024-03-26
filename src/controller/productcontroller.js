@@ -1,7 +1,7 @@
 
-import Product from "../model/product"
-import errormessage from "../utiles/errormessage"
-import sucessmessage from "../utiles/successmessage"
+import Product from "../model/product.js"
+import errormessage from "../utiles/errormessage.js"
+import sucessmessage from "../utiles/successmessage.js"
 
 class productController{
     static async postoroduct(req,res){

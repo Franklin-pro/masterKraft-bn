@@ -1,7 +1,7 @@
-import User from "../model/user";
+import User from "../model/user.js";
 import bcrypt from "bcrypt"
-import errormessage from "../utiles/errormessage";
-import sucessmessage from "../utiles/successmessage";
+import errormessage from "../utiles/errormessage.js";
+import sucessmessage from "../utiles/successmessage.js";
 import jwt from "jsonwebtoken"
 
 

@@ -1,6 +1,6 @@
-import Contact from "../model/contact"
-import errormessage from "../utiles/errormessage"
-import sucessmessage from "../utiles/successmessage"
+import Contact from "../model/contact.js"
+import errormessage from "../utiles/errormessage.js"
+import sucessmessage from "../utiles/successmessage.js"
 
 
 

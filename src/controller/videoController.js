@@ -1,8 +1,8 @@
 
 
-import Videoupload from "../model/videoupload";
-import errormessage from "../utiles/errormessage";
-import sucessmessage from "../utiles/successmessage";
+import Videoupload from "../model/videoupload.js";
+import errormessage from "../utiles/errormessage.js";
+import sucessmessage from "../utiles/successmessage.js";
 
 // exports.uploadVideo = async (req, res) => {
 //   try {

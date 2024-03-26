@@ -1,5 +1,5 @@
 
-import errormessage from "../utiles/errormessage";
+import errormessage from "../utiles/errormessage.js";
 import jwt from "jsonwebtoken";
 
 const VerifyAccess = (passRole)=>{

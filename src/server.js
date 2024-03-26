@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 import express from "express"
 import bodyParser from "body-parser"
 import cors from "cors"
-import router from "./routers"
+import router from "./routers/index.js"
 // import serveStatic from "serve-static"
 import path from 'path'
 dotenv.config()
@@ -11,7 +11,7 @@ dotenv.config()
 const Master = express()
 
 Master.use(cors())
-Master.use('/videos',express.static(path.join(__dirname,'../uploads')))
+Master.use('/videos', express.static(new URL('../uploads', import.meta.url).pathname));
 Master.use(bodyParser.json())
 Master.use(bodyParser.urlencoded({
     extended: true
