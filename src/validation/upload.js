@@ -9,10 +9,10 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('productImage/')) {
+  if (file.mimetype.startsWith('video/')) {
     cb(null, true);
   } else {
-    cb(new Error('Not an image! Please upload an image.'), false);
+    cb(new Error('Not an video! Please upload an video.'), false);
   }
 };
 
