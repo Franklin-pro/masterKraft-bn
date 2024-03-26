@@ -1,7 +1,7 @@
 
-import Didyou from "../model/didyou";
-import errormessage from "../utiles/errormessage";
-import sucessmessage from "../utiles/successmessage";
+import Didyou from "../model/didyou.js";
+import errormessage from "../utiles/errormessage.js";
+import sucessmessage from "../utiles/successmessage.js";
 
 
 class didyouController{

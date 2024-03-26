@@ -1,8 +1,8 @@
 
-import contactController from "../controller/contactcontroller";
+import contactController from "../controller/contactcontroller.js";
 import express from "express"
-import DtataChequer from "../middlewares/datachecker";
-import validator from "../middlewares/validation";
+import DtataChequer from "../middlewares/datachecker.js";
+import validator from "../middlewares/validation.js";
 
 
 const router = express.Router()

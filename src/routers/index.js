@@ -1,9 +1,9 @@
 import express from "express"
-import userRouter from "./userRouter"
-import contactRouter from "./contactRouter"
-import videoRouter from "./videoRouter"
-import didyouRouter from "./didyouRouter"
-import productRouter from "./productRouter"
+import userRouter from "./userRouter.js"
+import contactRouter from "./contactRouter.js"
+import videoRouter from "./videoRouter.js"
+import didyouRouter from "./didyouRouter.js"
+import productRouter from "./productRouter.js"
 
 
 const router=express.Router()

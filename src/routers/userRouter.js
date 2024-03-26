@@ -1,7 +1,7 @@
 import express from "express"
-import userController from "../controller/usercontroller"
-import DtataChequer from "../middlewares/datachecker"
-import validator from "../middlewares/validation"
+import userController from "../controller/usercontroller.js"
+import DtataChequer from "../middlewares/datachecker.js"
+import validator from "../middlewares/validation.js"
 
 
 

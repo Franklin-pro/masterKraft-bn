@@ -1,10 +1,10 @@
 
 import express from "express"
-import videocontrollers from "../controller/videoController"
-import VerifyAccess from "../middlewares/velifyaccess"
-import DtataChequer from "../middlewares/datachecker"
+import videocontrollers from "../controller/videoController.js"
+import VerifyAccess from "../middlewares/velifyaccess.js"
+import DtataChequer from "../middlewares/datachecker.js"
 import multer from "multer"
-import upload from "../validation/upload"
+import upload from "../validation/upload.js"
 
 const router = express.Router()
 router.post("/post", upload.single("video"), DtataChequer.videoPostIsEmpty, videocontrollers.uploadpostvideo);

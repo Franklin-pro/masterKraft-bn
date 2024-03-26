@@ -1,5 +1,5 @@
-import errormessage from "../utiles/errormessage"
-import User from "../model/user"
+import errormessage from "../utiles/errormessage.js"
+import User from "../model/user.js"
 
 class DtataChequer{
 
