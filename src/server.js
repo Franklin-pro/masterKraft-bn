@@ -1,32 +1,32 @@
-import dotenv from "dotenv"
-import mongoose from "mongoose"
-import express from "express"
-import bodyParser from "body-parser"
-import cors from "cors"
-import router from "./routers/index.js"
-// import serveStatic from "serve-static"
-import path from 'path'
-dotenv.config()
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import router from "./routers/index.js";
+import path from 'path';
 
-const Master = express()
+dotenv.config();
 
-Master.use(cors())
-Master.use('/videos', express.static(new URL('../uploads', import.meta.url).pathname));
-Master.use(bodyParser.json())
-Master.use(bodyParser.urlencoded({
-    extended: true
-  }));
-Master.use("/API", router)
+const app = express();
 
-const port = process.env.PORT
-const db = process.env.DATABASE
 
-Master.listen(port, () => {
-    console.log(`port running on ${port}`)
-})
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/videos', express.static(path.join(new URL('../uploads', import.meta.url).pathname)));
+app.use("/API", router);
 
-mongoose.connect(db).then(() => {
-    console.log("successfully connected to the database...")
-}).catch((error) => {
-    console.log(error)
-})
+
+const port = process.env.PORT;
+const dbUri = process.env.DATABASE;
+mongoose.connect(dbUri)
+    .then(() => {
+        console.log("Successfully connected to the database.");
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    })
+    .catch((error) => {
+        console.error("Database connection error:", error);
+    });

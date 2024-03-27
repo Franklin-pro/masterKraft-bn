@@ -3,32 +3,40 @@
 import Videoupload from "../model/videoupload.js";
 import errormessage from "../utiles/errormessage.js";
 import sucessmessage from "../utiles/successmessage.js";
+import cloudinary from "../utiles/videos.js";
 
-// exports.uploadVideo = async (req, res) => {
-//   try {
-//     const { video, uploader, youtubeLink } = req.body;
-//     const newVideo = new Video({ video, uploader, youtubeLink });
-//     await newVideo.save();
-//     res.status(201).json({ message: 'Video uploaded successfully', video: newVideo });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
+
 
 class videocontrollers{
 
-    static async uploadpostvideo(req,res){
+    static async postVideo(req, res) {
         try {
-            const {videoTitle,videoDescription,youtubeLink } = req.body;
-          const video=req.file.path
-            const newVideo = new Videoupload({video,videoTitle,videoDescription,youtubeLink });
-             await newVideo.save();
-             res.status(201).json({ message:'Video uploaded successfully', video: newVideo })
-
+          
+          if (!req.file) {
+            return errormessage(res, 400, 'Please upload a product video.');
+          }
+    
+         
+          const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'product',
+          });
+          const videos = await Videoupload.create({
+            video: {
+              public_id: result.public_id,
+              url: result.secure_url,
+            },
+            videoDescription: req.body.videoDescription,
+            youtubeLink: req.body.youtubeLink,
+          });
+          if (!videos) {
+            return errormessage(res, 500, 'Failed to create product.');
+          }
+          return sucessmessage(res, 201, 'Product successfully posted', videos);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+          console.error('Error:', error);
+          return errormessage(res, 500, `Error: ${error.message}`);
         }
-    }
+      }
     
     static async getvideo(req,res){
         try {
