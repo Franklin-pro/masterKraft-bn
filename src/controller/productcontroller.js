@@ -1,23 +1,42 @@
 
 import Product from "../model/product.js"
 import errormessage from "../utiles/errormessage.js"
+import cloudinary from '../utiles/cloud.js'
 import sucessmessage from "../utiles/successmessage.js"
 
 class productController{
-    static async postoroduct(req,res){
-        const {productName,quantityAvailable,serialNumber,productPrice}=req.body
-        const productImage=req.file.path
-         try {
-            const product = await Product.create({productImage,productName,quantityAvailable,serialNumber,productPrice})
-             if(!product){
-                return errormessage(res,401,"product not created")
-             }else{
-                return sucessmessage(res,201,"product successfuly posted",product)
-             }
-         } catch (error) {
-            return errormessage(res,500,`error is ${error}`)
-         }
-    }
+    static async postProduct(req, res) {
+        try {
+         
+          if (!req.file) {
+            return errormessage(res, 400, 'Please upload a product image.');
+          }
+    
+          
+          const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: 'product',
+          });
+          const product = await Product.create({
+            productImage: {
+              public_id: result.public_id,
+              url: result.secure_url,
+            },
+            productName: req.body.productName,
+            quantityAvailable: req.body.quantityAvailable,
+            serialNumber: req.body.serialNumber,
+            productPrice: req.body.productPrice,
+          });
+          if (!product) {
+            return errormessage(res, 500, 'Failed to create product.');
+          }
+          return sucessmessage(res, 201, 'Product successfully posted', product);
+        } catch (error) {
+          console.error('Error:', error);
+          return errormessage(res, 500, `Error: ${error.message}`);
+        }
+      }
+
+    
 
     static async getproduct(req,res){
         try {
