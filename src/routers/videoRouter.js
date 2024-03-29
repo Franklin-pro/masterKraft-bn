@@ -7,15 +7,16 @@ import multer from "multer";
 import upload from "../validation/upload.js";
 // import cloudinaryService from '../utiles/cloud.js'; 
 
+
 const router = express.Router();
 
 const uploadMiddleware = multer({ dest: 'uploads/' });
 
-router.post("/post",uploadMiddleware.single("video"), DtataChequer.videoPostIsEmpty,videocontrollers.postVideo);
+router.post("/post",VerifyAccess("admin"),uploadMiddleware.single("video"), DtataChequer.videoPostIsEmpty,videocontrollers.postVideo);
 
 router.get("/get", videocontrollers.getvideo);
 router.get("/get/:id", videocontrollers.getonevideo);
-router.delete("/delete", videocontrollers.deletevideo);
-router.delete("/delete/:id", videocontrollers.deleteonevideo);
+router.delete("/delete",VerifyAccess("admin"), videocontrollers.deletevideo);
+router.delete("/delete/:id",VerifyAccess("admin"), videocontrollers.deleteonevideo);
 
 export default router;
