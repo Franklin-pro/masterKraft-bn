@@ -12,7 +12,7 @@ const router = express.Router();
 
 const uploadMiddleware = multer({ dest: 'uploads/' });
 
-router.post("/post",VerifyAccess("admin"),uploadMiddleware.single("video"), DtataChequer.videoPostIsEmpty,videocontrollers.postVideo);
+router.post("/post",uploadMiddleware.single("video"), DtataChequer.videoPostIsEmpty,videocontrollers.postVideo);
 
 router.get("/get", videocontrollers.getvideo);
 router.get("/get/:id", videocontrollers.getonevideo);

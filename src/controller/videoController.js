@@ -8,12 +8,16 @@ import User from "../model/user.js";
 class videocontrollers{
 
     static async postVideo(req, res) {
-        try {
-          
-          if (!req.file) {
-            return errormessage(res, 400, 'Please upload a product video.');
-          }
-    
+ const{video,videoTitle,videoDescription,youtubeLink}= req.body
+
+ try {
+    const videos = await Videoupload.create({video,videoTitle,videoDescription,youtubeLink})
+    if(videos){
+return sucessmessage(res,201,`video uploaded successfully`,videos)
+    }else{
+        return errormessage(res,401,`video not uploaded try again`)
+    }
+ } catch (error) {
          
           const result = await cloudinary.uploader.upload(req.file.path, {
             folder: 'product',
