@@ -3,6 +3,7 @@ import Oder from "../model/order.js";
 import Product from "../model/product.js";
 import errormessage from "../utiles/errormessage.js";
 import sucessmessage from "../utiles/successmessage.js";
+import orderemail from "../utiles/orderemail.js";
 class oderController{
      static async orderingProduct(req,res){
         const { productId,userId, quantity } = req.body;
@@ -23,6 +24,7 @@ class oderController{
                  await product.save();
                  const order = new Oder({ productId, quantity, totalPrice });
                  await order.save();
+                 orderemail(order)
                  return sucessmessage(res,201,`successfuly odering product`,order)
             }
         }
