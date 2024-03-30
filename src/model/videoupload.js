@@ -5,14 +5,8 @@ import mongoose from "mongoose";
 const videoSchemas = new mongoose.Schema({
 
     video: {
-        public_id: {
             type: String,
             required: true
-        },
-        url: {
-            type: String,
-            required: true
-        }
     },
     videoTitle:{type:String,required:true},
     videoDescription:{type:String,required:true},

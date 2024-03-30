@@ -3,39 +3,25 @@
 import Videoupload from "../model/videoupload.js";
 import errormessage from "../utiles/errormessage.js";
 import sucessmessage from "../utiles/successmessage.js";
-import cloudinary from "../utiles/videos.js";
+
 
 
 
 class videocontrollers{
 
     static async postVideo(req, res) {
-        try {
-          
-          if (!req.file) {
-            return errormessage(res, 400, 'Please upload a product video.');
-          }
+ const{video,videoTitle,videoDescription,youtubeLink}= req.body
+
+ try {
+    const videos = await Videoupload.create({video,videoTitle,videoDescription,youtubeLink})
+    if(videos){
+return sucessmessage(res,201,`video uploaded successfully`,videos)
+    }else{
+        return errormessage(res,401,`video not uploaded try again`)
+    }
+ } catch (error) {
     
-         
-          const result = await cloudinary.uploader.upload(req.file.path, {
-            folder: 'product',
-          });
-          const videos = await Videoupload.create({
-            video: {
-              public_id: result.public_id,
-              url: result.secure_url,
-            },
-            videoDescription: req.body.videoDescription,
-            youtubeLink: req.body.youtubeLink,
-          });
-          if (!videos) {
-            return errormessage(res, 500, 'Failed to create product.');
-          }
-          return sucessmessage(res, 201, 'Product successfully posted', videos);
-        } catch (error) {
-          console.error('Error:', error);
-          return errormessage(res, 500, `Error: ${error.message}`);
-        }
+ }
       }
     
     static async getvideo(req,res){
