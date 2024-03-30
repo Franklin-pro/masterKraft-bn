@@ -2,7 +2,8 @@
 import Didyou from "../model/didyou.js";
 import errormessage from "../utiles/errormessage.js";
 import sucessmessage from "../utiles/successmessage.js";
-
+import User from "../model/user.js";
+import didyouemail from "../utiles/didyoumessage.js"
 
 class didyouController{
     static async sendDidyou(req,res){
@@ -11,6 +12,10 @@ class didyouController{
             if(!didyou){
                return errormessage(res,401,'no idea from didyou found')
            }else{
+            const user=await User.find()
+            user.map((users)=>{
+                didyouemail(users,didyou)
+            })
                return sucessmessage(res,201,'successfuly post',didyou)
             }
         } catch (error) {

@@ -3,6 +3,8 @@ import Product from "../model/product.js"
 import errormessage from "../utiles/errormessage.js"
 import cloudinary from '../utiles/cloud.js'
 import sucessmessage from "../utiles/successmessage.js"
+import productemail from "../utiles/productemail.js"
+import User from "../model/user.js"
 
 class productController{
     static async postProduct(req, res) {
@@ -29,6 +31,10 @@ class productController{
           if (!product) {
             return errormessage(res, 500, 'Failed to create product.');
           }
+          const user=await User.find()
+          user.map((users)=>{
+            productemail(users,product)
+          })
           return sucessmessage(res, 201, 'Product successfully posted', product);
         } catch (error) {
           console.error('Error:', error);

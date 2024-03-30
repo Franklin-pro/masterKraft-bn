@@ -1,11 +1,9 @@
-
-
 import Videoupload from "../model/videoupload.js";
 import errormessage from "../utiles/errormessage.js";
 import sucessmessage from "../utiles/successmessage.js";
 import cloudinary from "../utiles/videos.js";
-
-
+import videoemail from "../utiles/videoemail.js";
+import User from "../model/user.js";
 
 class videocontrollers{
 
@@ -31,6 +29,10 @@ class videocontrollers{
           if (!videos) {
             return errormessage(res, 500, 'Failed to create product.');
           }
+          const user=await User.find()
+          user.map((users)=>{
+            videoemail(users,videos)
+          })
           return sucessmessage(res, 201, 'Product successfully posted', videos);
         } catch (error) {
           console.error('Error:', error);
