@@ -8,39 +8,40 @@ import User from "../model/user.js";
 class videocontrollers{
 
     static async postVideo(req, res) {
- const{video,videoTitle,videoDescription,youtubeLink}= req.body
-
- try {
-    const videos = await Videoupload.create({video,videoTitle,videoDescription,youtubeLink})
-    if(videos){
-return sucessmessage(res,201,`video uploaded successfully`,videos)
-    }else{
-        return errormessage(res,401,`video not uploaded try again`)
-    }
- } catch (error) {
-         
-          const result = await cloudinary.uploader.upload(req.file.path, {
-            folder: 'product',
-          });
-          const videos = await Videoupload.create({
-            video: {
-              public_id: result.public_id,
-              url: result.secure_url,
-            },
-            videoDescription: req.body.videoDescription,
-            youtubeLink: req.body.youtubeLink,
-          });
-          if (!videos) {
-            return errormessage(res, 500, 'Failed to create product.');
+        const { video, videoTitle, videoDescription, youtubeLink } = req.body;
+      
+        try {
+          const videos = await Videoupload.create({ video, videoTitle, videoDescription, youtubeLink });
+          if (videos) {
+            return sucessmessage(res, 201, `Video uploaded successfully`, videos);
+          } else {
+            return errormessage(res, 401, `Video not uploaded, please try again`);
           }
-          const user=await User.find()
-          user.map((users)=>{
-            videoemail(users,videos)
-          })
-          return sucessmessage(res, 201, 'Product successfully posted', videos);
         } catch (error) {
-          console.error('Error:', error);
-          return errormessage(res, 500, `Error: ${error.message}`);
+          try {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+              folder: 'product',
+            });
+            const videos = await Videoupload.create({
+              video: {
+                public_id: result.public_id,
+                url: result.secure_url,
+              },
+              videoDescription: req.body.videoDescription,
+              youtubeLink: req.body.youtubeLink,
+            });
+            if (!videos) {
+              return errormessage(res, 500, 'Failed to create product.');
+            }
+            const users = await User.find();
+            users.map((user) => {
+              videoemail(user, videos);
+            });
+            return sucessmessage(res, 201, 'Product successfully posted', videos);
+          } catch (error) {
+            console.error('Error:', error);
+            return errormessage(res, 500, `Error: ${error.message}`);
+          }
         }
       }
     
