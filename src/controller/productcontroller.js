@@ -97,6 +97,20 @@ class productController{
             return errormessage(res,500,`error is ${error}`)
         }
     }
+    static async updateProduct(req, res) {
+        const id = req.params.id;
+        try {
+            const product = await Product.findByIdAndUpdate(id, req.body, { new: true });
+            if (!product) {
+                return errormessage(res, 404, "Product not found");
+            } else {
+                return sucessmessage(res, 200, "Product updated successfully", product);
+            }
+        } catch (error) {
+            return errormessage(res, 500, `Error updating product: ${error}`);
+        }
+    }
+    
 
 }
 export default productController

@@ -10,4 +10,5 @@ import VerifyAccess from "../middlewares/velifyaccess.js"
   router.get("/get/:id",productController.getoneproduct)
   router.delete("/delete",VerifyAccess("admin"),productController.deleteproduct)
   router.delete("/delete/:id",VerifyAccess("admin"),productController.deleteoneproduct)
+  router.put("/updated/:id",productController.updateProduct)
  export default router
