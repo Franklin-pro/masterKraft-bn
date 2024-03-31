@@ -5,7 +5,7 @@ import VerifyAccess from "../middlewares/velifyaccess.js"
 
 
  const router = express.Router()
- router.post("/post",VerifyAccess("admin"), upload.single('productImage'), productController.postProduct)
+ router.post("/post", upload.single('productImage'), productController.postProduct)
   router.get("/get",productController.getproduct)
   router.get("/get/:id",productController.getoneproduct)
   router.delete("/delete",VerifyAccess("admin"),productController.deleteproduct)
