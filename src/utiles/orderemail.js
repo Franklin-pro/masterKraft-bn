@@ -13,9 +13,9 @@ const orderemail=async(userinfo)=>{
     let mailoptions={
         from:process.env.EMAIL,
         to:userinfo.email,
-        subject:` Ordering Done`,
+        subject:` Ordering successfully`,
         html:`<p> Dear, <b>${userinfo.firstname}</b></p><br><br>
-        <p> Your Ordering Successfuly Done!!!!! <br><br>${userinfo.firstname} Thank your`
+        <p> Your Ordering Successfuly Done!!!!! <br><br>${userinfo.firstname} Thank you`
     };
     transport.sendMail(mailoptions,function(err,info){
         if(err){

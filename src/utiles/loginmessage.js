@@ -14,7 +14,7 @@ const sendLoginEmail=async(userinfo)=>{
         from:process.env.EMAIL,
         to:userinfo.email,
         subject:` Login Notification`,
-        html:`<p> Your Login Successfuly Done!!!! Thank your.</p>`
+        html:`<p> Your Login Successfuly Done!!!! Thank you.</p>`
     };
     transport.sendMail(mailoptions,function(err,info){
         if(err){
