@@ -12,7 +12,7 @@ validator.userAccountRule(),validator.inputvalidator,userController.signup)
 
 
 router.post("/login",userController.Login)
-router.get("/get",userController.getuser)
+router.get("/get",VerifyAccess("admin"),userController.getuser)
 router.get("/get/:id",userController.getoneuser)
 router.delete("/delete",VerifyAccess("admin"),userController.deleteuser)
 router.delete("/delete/:id",userController.deleteoneuser)

@@ -10,9 +10,9 @@ const router = express.Router()
 router.post("/post",DtataChequer.userRegisterIsEmpty,validator.contactAccountRule()
 ,validator.inputvalidator,contactController.sendmessage)
 
-router.get("/get",contactController.getcontact)
+router.get("/get",VerifyAccess("admin"),contactController.getcontact)
 router.delete("/delete",VerifyAccess("admin"),contactController.deletecontact)
 router.get("/get/:id",contactController.getOnecontact)
-router.delete("/delete/:id",contactController.deleteOnecontact)
+router.delete("/delete/:id",VerifyAccess("admin"),contactController.deleteOnecontact)
 
 export default router
