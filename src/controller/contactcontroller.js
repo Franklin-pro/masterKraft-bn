@@ -1,7 +1,8 @@
 import Contact from "../model/contact.js"
 import errormessage from "../utiles/errormessage.js"
 import sucessmessage from "../utiles/successmessage.js"
-
+import contactEmail from "../utiles/contactmessage.js"
+import User from "../model/user.js"
 
 
 class contactController{
@@ -10,7 +11,8 @@ class contactController{
             const contact = await Contact.create(req.body)
             if(!contact){
                 return errormessage(res,401,'message not sent')
-            }else{
+            }else{ 
+                contactEmail(contact)
                 return sucessmessage(res,201,'message successfuly sent',contact)
             }
         } catch (error) {
