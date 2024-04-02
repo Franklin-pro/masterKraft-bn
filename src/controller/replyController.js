@@ -1,22 +1,18 @@
 import replyemail from "../utiles/replyemail.js";
-import sucessmessage from '../utiles/successmessage.js'; // Corrected spelling of 'success'
-import errormessage from '../utiles/errormessage.js'; // Corrected spelling of 'error'
+import successmessage from '../utiles/successmessage.js';
+import errormessage from '../utiles/errormessage.js';
 
-class replyEmail {
+class ReplyEmail {
     static async sendReply(req, res) {
         try {
-            const { userInfo } = req.body;
-            const replying = await replyemail(userInfo);
-
-            if (replying) {
-                return sucessmessage(res, 201, `email successfully`, replying);
-            } else {
-                return errormessage(res,401, `not email sent`);
-            }
+            const { userinfo } = req.body;
+            await replyemail(userinfo);
+            res.status(200).send("Email sent successfully");
         } catch (error) {
-            return errormessage(res, 500, `reply error is: ${error}`);
+            console.error("Error sending reply email:", error);
+            res.status(500).send("Internal server error");
         }
     }
 }
 
-export default replyEmail;
+export default ReplyEmail;

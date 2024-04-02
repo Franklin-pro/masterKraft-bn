@@ -24,7 +24,7 @@ const replyemail = async (userinfo) => {
         let mailoptions = {
             from: process.env.EMAIL,
             to: userinfo.email,
-            subject: `Hello, ${userinfo.firstname}`,
+            subject: `Hello, ${userinfo.fullname}`,
             text: `Dear ${userinfo.firstname},\n\nThank you for your message. We will get back to you soon.\n\nBest regards,\nYour Company Name`
             // You can customize the email text as needed
         };
