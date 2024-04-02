@@ -37,36 +37,11 @@ class oderController{
                     })
                     await product.save();
                     await order.save();
-                    res.status(201).json({ message: 'Order placed successfully', order });
+                    return sucessmessage(res,201,`Ordering successfuly done`,order)
                 }
             }
-            // if(proid.length !==24 || proid.length <24){
-            //     return errormessage(res,401,`Invalid ID`)
-            // }else{
-            //     const pro=await Product.findById(proid)
-            //     if(quantity > pro.quantityAvailable){
-            //         console.log("you don't have enough storage")
-            //     }else{
-            //         const order=quantity - pro.quantityAvailable
-            //         const totalPrice=pro.productPrice * order
-            //         pro.orderingHistory.push({
-            //             quantity,
-            //             totalPrice,
-            //             orderingTime:Date.now()
-            //         })
-            //         await pro.save()
-            //         const ordering=new Oder({
-            //             quantity,
-            //             totalPrice,
-            //         })
-            //          await Product.save();
-            //         await ordering.save();
-            //         res.status(201).json({ message: 'Order placed successfully', ordering });
-            //     }
-                
-            // }
         } catch (error) {
-            
+            return errormessage(res,500,`Error!! ${error}`)
         }
     }
     static async deleteOder(req,res){
