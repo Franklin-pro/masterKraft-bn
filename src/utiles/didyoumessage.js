@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer"
 
-const didyouemail=async(userInfo,blogInfo)=>{
+const didyouemail=async(userInfo,didinfo)=>{
     let transport=nodemailer.createTransport({
         host:"smtp.gmail.com",
         port:465,
@@ -14,8 +14,8 @@ const didyouemail=async(userInfo,blogInfo)=>{
         from:process.env.EMAIL,
         to:userInfo.email,
         subject:`Wekraft`,
-        html:`<p>Dear</p><p><b>${userInfo.firstName}</b></p><p> You did know?New update<br><br>
-        <b> ${blogInfo.title}</b></p>`
+        html:`<p>Dear</p><h2>${userInfo.firstname}</h2><br><p>Did know? Wekraft has new Realize update.</p><br>
+        <p>${didinfo.Title}</p>`
     }
     transport.sendMail(mailOption,function(err,info){
         if(err){

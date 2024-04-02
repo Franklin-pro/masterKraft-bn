@@ -1,32 +1,72 @@
-import User from "../model/user.js";
 import Oder from "../model/order.js";
 import Product from "../model/product.js";
 import errormessage from "../utiles/errormessage.js";
 import sucessmessage from "../utiles/successmessage.js";
-import orderemail from "../utiles/orderemail.js";
 class oderController{
      static async orderingProduct(req,res){
-        const { productId,userId, quantity } = req.body;
-        const product = await Product.findById(productId)
-        if(!product){
-            return errormessage(res,401,`product not found`)
-        }
-        else{
-            const user=await User.findById(userId)
-            if(!customer){
-                return errormessage(res,401,`please first enter your address`)
+        try {
+            const{quantity,phoneNumber,email,shippingAddress}=req.body
+            const proid=req.params.id
+            req.body.user=req.user._id
+            const product= await Product.findById(proid)
+            if(!product){
+                return errormessage(res,401,`product not found`)
             }
-            else if(quantity > product.quantityAvailable){
-                return errormessage(res,401,`Insufishient product in the stock`)
-            } else{
-                const totalPrice = product.price * quantity;
-                product.quantityAvailable -= quantity;
-                 await product.save();
-                 const order = new Oder({ productId, quantity, totalPrice });
-                 await order.save();
-                 orderemail(order)
-                 return sucessmessage(res,201,`successfuly odering product`,order)
+            else{
+                if(product.quantityAvailable < quantity){
+                    return errormessage(res,401,`we haven't enough product`)
+                }
+                else{
+                    const totalPrice=product.productPrice * quantity
+                    const productname=product.productName
+                    const productprice=product.productPrice
+                    const order = new Oder({
+                        productname,
+                        productprice,
+                        quantity,
+                        totalPrice,
+                        phoneNumber,
+                        email,
+                        shippingAddress
+                    });
+                    product.quantityAvailable -= quantity;
+                    product.orderingHistory.push({
+                        quantity,
+                        totalPrice,
+                        orderingTime:Date.now()
+                    })
+                    await product.save();
+                    await order.save();
+                    res.status(201).json({ message: 'Order placed successfully', order });
+                }
             }
+            // if(proid.length !==24 || proid.length <24){
+            //     return errormessage(res,401,`Invalid ID`)
+            // }else{
+            //     const pro=await Product.findById(proid)
+            //     if(quantity > pro.quantityAvailable){
+            //         console.log("you don't have enough storage")
+            //     }else{
+            //         const order=quantity - pro.quantityAvailable
+            //         const totalPrice=pro.productPrice * order
+            //         pro.orderingHistory.push({
+            //             quantity,
+            //             totalPrice,
+            //             orderingTime:Date.now()
+            //         })
+            //         await pro.save()
+            //         const ordering=new Oder({
+            //             quantity,
+            //             totalPrice,
+            //         })
+            //          await Product.save();
+            //         await ordering.save();
+            //         res.status(201).json({ message: 'Order placed successfully', ordering });
+            //     }
+                
+            // }
+        } catch (error) {
+            
         }
     }
     static async deleteOder(req,res){

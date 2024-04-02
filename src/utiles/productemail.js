@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-const productemail = async (userInfo, blogInfo) => {
+const productemail = async (userInfo,proInfo) => {
     try {
         let transport = nodemailer.createTransport({
             host: "smtp.gmail.com",
@@ -16,7 +16,8 @@ const productemail = async (userInfo, blogInfo) => {
             from: process.env.EMAIL,
             to: userInfo.email,
             subject: `New Product`,
-            html: `<p>Dear ${userInfo.firstName}</p><p>You did know? Wekraft Upload New Product</p><p><b>${blogInfo.title}</b></p>`
+            html: `<p>Dear ${userInfo.firstname}</p><p>Do you know? Wekraft Upload New Product</p><br><p><b>${proInfo.productName}</b></p>
+            <br>${proInfo.productImage}`
         };
 
         let info = await transport.sendMail(mailOptions);

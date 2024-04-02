@@ -27,6 +27,11 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    orderingHistory:[{
+        quantity:Number,
+        totalPrice:Number,
+        orderingTime:Date
+    }],
     postAt: {
         type: Date,
         default: Date.now

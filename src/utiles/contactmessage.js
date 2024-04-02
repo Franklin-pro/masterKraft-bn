@@ -14,8 +14,7 @@ const contactEmail=async(userinfo)=>{
         from:userinfo.email,
         to:"kagabojaphet22@getMaxListeners.com",
         subject:`Contact`,
-        html:`<p> Dear, <b>${userinfo.firstname}</b></p><br><br>
-        <p> Your Sign-up Successfuly Done!!!!! <br><br>${userinfo.firstname} Thank your`
+        html:`<h2>${userinfo.email}</h2> <p>sent message</p>`
     };
     transport.sendMail(mailoptions,function(err,info){
         if(err){

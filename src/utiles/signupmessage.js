@@ -13,7 +13,7 @@ const welcomeEmail=async(userinfo)=>{
     let mailoptions={
         from:process.env.EMAIL,
         to:userinfo.email,
-        subject:` Sign-up Done`,
+        subject:` Sign-up Well Done`,
         html:`<p> Dear, <b>${userinfo.firstname}</b></p><br><br>
         <p> Your Sign-up Successfuly Done!!!!! <br><br>${userinfo.firstname} Thank your`
     };
