@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer"
 
-const videoemail=async(userInfo,blogInfo)=>{
+const videoemail=async(userInfo,videoInfo)=>{
     let transport=nodemailer.createTransport({
         host:"smtp.gmail.com",
         port:465,
@@ -14,8 +14,8 @@ const videoemail=async(userInfo,blogInfo)=>{
         from:process.env.EMAIL,
         to:userInfo.email,
         subject:`New Video`,
-        html:`<p>Dear</p><p><b>${userInfo.firstName}</b></p><p> You did know?Wekraft Upload New Video<br><br>
-        <b> ${blogInfo.title}</b></p>`
+        html:`<p>Dear</p><p><b>${userInfo.firstName}</b></p><p>Wekraft Upload New Video<br><br>
+        <b> ${videoInfo.video}</b></p>`
     }
     transport.sendMail(mailOption,function(err,info){
         if(err){

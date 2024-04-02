@@ -1,21 +1,37 @@
 import mongoose from "mongoose";
 const oderSchemas = new mongoose.Schema({
-    productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true
-    },
-    userId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
     },
     quantity: {
         type: Number,
         required: true
     },
+    productname:{
+        type:String
+    },
+    productprice:{
+        type:Number
+    },
+    phoneNumber:{
+        type:Number,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    shippingAddress:{
+        type:String,
+        required:true
+    },
     totalPrice: {
         type: Number,
-        required: true
+    },
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
     oderAt:{
         type:Date,
@@ -24,12 +40,9 @@ const oderSchemas = new mongoose.Schema({
 })
 oderSchemas.pre(/^find/,function(next){
     this.populate({
-        path:"productId",
-        select:"productname price"
-    }).populate({
-        path:"userId",
-        select:"email",
-})
+        path:"user",
+        select:""
+    })
     next()
 })
 const Oder=mongoose.model("Oder",oderSchemas)
