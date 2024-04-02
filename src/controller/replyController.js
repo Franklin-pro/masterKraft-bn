@@ -11,7 +11,7 @@ class replyEmail {
             if (replying) {
                 return sucessmessage(res, 201, `email successfully`, replying);
             } else {
-                return errormessage(res, 204, `not email sent`);
+                return errormessage(res,401, `not email sent`);
             }
         } catch (error) {
             return errormessage(res, 500, `reply error is: ${error}`);
