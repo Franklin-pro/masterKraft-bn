@@ -14,7 +14,7 @@ const orderemail=async(userinfo,orderinfo)=>{
         from:process.env.EMAIL,
         to:userinfo.email,
         subject:` Ordering Product`,
-        html:`<p> Dear, <b>${userinfo.firstname}</b></p><br><br>
+        html:`<p> Dear, <b>${userinfo.email}</b></p><br><br>
         <p>Your are Ordering <b>${orderinfo.productName}</b> Successfuly Done!!!!! <br><br>`
     };
     transport.sendMail(mailoptions,function(err,info){

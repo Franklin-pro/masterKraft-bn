@@ -2,12 +2,12 @@ import Oder from "../model/order.js";
 import Product from "../model/product.js";
 import errormessage from "../utiles/errormessage.js";
 import sucessmessage from "../utiles/successmessage.js";
+import orderemail from "../utiles/orderemail.js";
 class oderController{
      static async orderingProduct(req,res){
         try {
             const{quantity,phoneNumber,email,shippingAddress}=req.body
             const proid=req.params.id
-            req.body.user=req.user._id
             const product= await Product.findById(proid)
             if(!product){
                 return errormessage(res,401,`product not found`)
@@ -37,6 +37,7 @@ class oderController{
                     })
                     await product.save();
                     await order.save();
+                    orderemail(email,order)
                     return sucessmessage(res,201,`Ordering successfuly done`,order)
                 }
             }
