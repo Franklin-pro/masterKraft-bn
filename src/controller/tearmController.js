@@ -17,8 +17,8 @@ class OurTearm {
                     public_id: result.public_id,
                     url: result.secure_url,
                 },
-                personName: req.body.personName, // Access personName from req.body
-                personWork: req.body.personWork, // Access personWork from req.body
+                personName: req.body.personName,
+                personWork: req.body.personWork, 
             });
             if (tearm) {
                 return sucessmessage(res, 201, `${req.body.personName} posted successfully`, tearm);
@@ -28,6 +28,15 @@ class OurTearm {
         } catch (error) {
             console.error('Error:', error);
             return errormessage(res, 500, `Error: ${error.message}`);
+        }
+    }
+
+    static async getTeam(req,res){
+        const team = await Team.find()
+        if(!team){
+            return errormessage(res,401,`no team found`)
+        }else{
+            return sucessmessage(res,200,`all team retrived`,team)
         }
     }
 }
