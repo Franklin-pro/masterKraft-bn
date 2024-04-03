@@ -13,9 +13,20 @@ const contactSchema=new mongoose.Schema({
     sendAt:{
         type:Date,
         default:new Date(Date.now())
-    }
+    },
+    reply:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Reply"
+    }]
 
 
+})
+contactSchema.pre(/^find/,function(next){
+    this.populate({
+        path:"reply",
+        select:""
+    })
+    next()
 })
 const Contact =mongoose.model("Contact",contactSchema)
 export default Contact
