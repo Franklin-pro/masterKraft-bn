@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-const orderemail=async(userinfo,orderinfo)=>{
+const orderemail=async(email,orderinfo)=>{
     let transport=nodemailer.createTransport({
         host:"smtp.gmail.com",
         port:465,
@@ -12,10 +12,10 @@ const orderemail=async(userinfo,orderinfo)=>{
     });
     let mailoptions={
         from:process.env.EMAIL,
-        to:userinfo.email,
+        to:email,
         subject:` Ordering Product`,
-        html:`<p> Dear, <b>${userinfo.email}</b></p><br><br>
-        <p>Your are Ordering <b>${orderinfo.productName}</b> Successfuly Done!!!!! <br><br>`
+        html:`<p> Dear, <b>${email}</b></p><br><br>
+        <p>Your are Ordering <b>${orderinfo.productname}</b> Successfuly Done!!!!! <br><br>`
     };
     transport.sendMail(mailoptions,function(err,info){
         if(err){
