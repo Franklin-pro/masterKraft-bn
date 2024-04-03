@@ -5,7 +5,6 @@ import videoRouter from "./videoRouter.js"
 import didyouRouter from "./didyouRouter.js"
 import productRouter from "./productRouter.js"
 import oder from "./oderRouter.js"
-import replyemail from './replyRouter.js'
 
 
 const router=express.Router()
@@ -15,6 +14,5 @@ router.use("/video",videoRouter)
 router.use("/didyou",didyouRouter)
 router.use("/product",productRouter)
 router.use("/order",oder)
-router.use("/email",replyemail)
 
 export default router
