@@ -6,4 +6,5 @@ import upload from '../validation/uploadProduct.js';
 const router = express.Router()
 
 router.post("/",upload.single('teamImage'),OurTearm.tearms)
+router.get("/get",OurTearm.getTeam)
 export default router
