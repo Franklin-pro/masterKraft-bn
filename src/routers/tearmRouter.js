@@ -7,4 +7,5 @@ const router = express.Router()
 
 router.post("/",upload.single('teamImage'),OurTearm.tearms)
 router.get("/get",OurTearm.getTeam)
+router.delete("/:id",OurTearm.delete)
 export default router

@@ -39,6 +39,19 @@ class OurTearm {
             return sucessmessage(res,200,`all team retrived`,team)
         }
     }
+    static async delete(req,res){
+        const id=req.params.id
+        try {
+            const product = await Team.findByIdAndDelete(id)
+            if(!product){
+                return errormessage(res,401,'no product found')
+            }else{
+                return sucessmessage(res,201,`successfuly product on this id ${id} deleted`)
+            }
+        } catch (error) {
+            return errormessage(res,500,`error is ${error}`)
+        }
+    }
 }
 
 export default OurTearm;
