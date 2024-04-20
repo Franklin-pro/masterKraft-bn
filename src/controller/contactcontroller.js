@@ -26,7 +26,7 @@ class contactController{
             if(!contact){
                 return errormessage(res,401,'no message from contact found')
             }else{
-                return sucessmessage(res,201,'message successfuly retrived',contact)
+                return sucessmessage(res,200,'message successfuly retrived',contact)
             }
          } catch (error) {
               return errormessage(res,500,`error is ${error}`)
@@ -39,7 +39,7 @@ class contactController{
            if(!contact){
                return errormessage(res,401,'no message from contact found')
            }else{
-               return sucessmessage(res,201,'message successfuly deleted')
+               return sucessmessage(res,200,'message successfuly deleted')
            }
         } catch (error) {
              return errormessage(res,500,`error is ${error}`)
@@ -53,7 +53,7 @@ class contactController{
        if(!contact){
            return errormessage(res,401,'no message from contact found')
        }else{
-           return sucessmessage(res,201,'message successfuly retrived',contact)
+           return sucessmessage(res,200,'message successfuly retrived',contact)
        }
     } catch (error) {
          return errormessage(res,500,`error is ${error}`)
